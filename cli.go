@@ -10,6 +10,7 @@ import (
 )
 
 const cmdName = "github-repos"
+// EnvGitHubTokenKey Key of GitHub Token on environment variables
 const EnvGitHubTokenKey = "GITHUB_TOKEN"
 
 // Run command
