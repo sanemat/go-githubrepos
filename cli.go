@@ -22,14 +22,23 @@ func Run(argv []string, outStream, errStream io.Writer) error {
 		fmt.Fprintf(fs.Output(), "Usage of %s:\n", nameAndVer)
 		fs.PrintDefaults()
 	}
+	var (
+		ver           = fs.Bool("version", false, "display version")
+		nullSeparator = fs.Bool("z", false, "use null separator")
+		org           = fs.String("org", "", "GitHub organization")
+	)
 
-	ver := fs.Bool("version", false, "display version")
 	if err := fs.Parse(argv); err != nil {
 		return err
 	}
 	if *ver {
 		return printVersion(outStream)
 	}
+	if *nullSeparator {
+		fmt.Print("Use null separator")
+	}
+
+	fmt.Print(*org)
 
 	argv = fs.Args()
 	if len(argv) >= 1 {
