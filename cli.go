@@ -10,9 +10,11 @@ import (
 )
 
 const cmdName = "github-repos"
+// EnvGitHubTokenKey Key of GitHub Token on environment variables
+const EnvGitHubTokenKey = "GITHUB_TOKEN"
 
 // Run command
-func Run(argv []string, outStream, errStream io.Writer) error {
+func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	log.SetOutput(errStream)
 	log.SetPrefix(fmt.Sprintf("[%s] ", cmdName))
 	nameAndVer := fmt.Sprintf("%s (v%s rev:%s)", cmdName, version, revision)
@@ -23,13 +25,27 @@ func Run(argv []string, outStream, errStream io.Writer) error {
 		fs.PrintDefaults()
 	}
 
-	ver := fs.Bool("version", false, "display version")
+	if token == "" {
+		return xerrors.Errorf("%s is required", EnvGitHubTokenKey)
+	}
+
+	var (
+		ver           = fs.Bool("version", false, "display version")
+		nullSeparator = fs.Bool("z", false, "use null separator")
+		org           = fs.String("org", "", "GitHub organization")
+	)
+
 	if err := fs.Parse(argv); err != nil {
 		return err
 	}
 	if *ver {
 		return printVersion(outStream)
 	}
+	if *nullSeparator {
+		fmt.Print("Use null separator")
+	}
+
+	fmt.Print(*org)
 
 	argv = fs.Args()
 	if len(argv) >= 1 {
