@@ -9,7 +9,7 @@ import (
 	"golang.org/x/xerrors"
 )
 
-const cmdName = "githubrepos"
+const cmdName = "github-repos"
 
 // Run command
 func Run(argv []string, outStream, errStream io.Writer) error {
