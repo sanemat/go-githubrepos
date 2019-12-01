@@ -1,15 +1,19 @@
 package githubrepos
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"io"
 	"log"
 
+	"github.com/shurcooL/githubv4"
+	"golang.org/x/oauth2"
 	"golang.org/x/xerrors"
 )
 
 const cmdName = "github-repos"
+
 // EnvGitHubTokenKey Key of GitHub Token on environment variables
 const EnvGitHubTokenKey = "GITHUB_TOKEN"
 
@@ -32,7 +36,8 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	var (
 		ver           = fs.Bool("version", false, "display version")
 		nullSeparator = fs.Bool("z", false, "use null separator")
-		org           = fs.String("org", "", "GitHub organization")
+		org           = fs.String("org", "github", "GitHub organization")
+		num           = fs.Int("num", 2, "numbers of repos")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -41,15 +46,43 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	if *ver {
 		return printVersion(outStream)
 	}
-	if *nullSeparator {
-		fmt.Print("Use null separator")
-	}
-
-	fmt.Print(*org)
 
 	argv = fs.Args()
 	if len(argv) >= 1 {
 		return xerrors.New("We have no subcommand")
+	}
+
+	src := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
+	httpClient := oauth2.NewClient(context.Background(), src)
+	client := githubv4.NewClient(httpClient)
+
+	{
+		var q struct {
+			Organization struct {
+				Repositories struct {
+					Nodes []struct {
+						SSHURL string
+					}
+					PageInfo struct {
+						EndCursor   string
+						HasNextPage bool
+					}
+				} `graphql:"repositories(first: $first)"`
+			} `graphql:"organization(login: $login)"`
+		}
+		variables := map[string]interface{}{
+			"login": githubv4.String(*org),
+			"first": githubv4.Int(*num),
+		}
+		err := client.Query(context.Background(), &q, variables)
+		if err != nil {
+			return err
+		}
+		fmt.Print(q.Organization.Repositories)
+	}
+
+	if *nullSeparator {
+		fmt.Print("Use null separator")
 	}
 
 	return nil
