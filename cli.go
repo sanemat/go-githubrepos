@@ -56,47 +56,53 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
 
-	{
-		type repo struct {
-			SSHURL string
-		}
-
-		var q struct {
-			Organization struct {
-				Repositories struct {
-					Nodes    []repo
-					PageInfo struct {
-						EndCursor   string
-						HasNextPage bool
-					}
-				} `graphql:"repositories(first: $first, after: $repositoriesCursor)"`
-			} `graphql:"organization(login: $login)"`
-		}
-		variables := map[string]interface{}{
-			"login":              githubv4.String(*org),
-			"first":              githubv4.Int(*num),
-			"repositoriesCursor": (*githubv4.String)(nil), // Null after argument to get first page.
-		}
-		var allRepos []repo
-		for {
-			err := client.Query(context.Background(), &q, variables)
-			if err != nil {
-				return err
-			}
-			allRepos = append(allRepos, q.Organization.Repositories.Nodes...)
-			if !q.Organization.Repositories.PageInfo.HasNextPage {
-				break
-			}
-			variables["repositoriesCursor"] = githubv4.NewString(githubv4.String(q.Organization.Repositories.PageInfo.EndCursor))
-		}
-		fmt.Print(allRepos)
+	repos, err := fetchRepos(context.Background(), *client, *org, *num)
+	if err != nil {
+		return err
 	}
+	fmt.Print(repos)
 
 	if *nullSeparator {
 		fmt.Print("Use null separator")
 	}
 
 	return nil
+}
+
+type repo struct {
+	SSHURL string
+}
+
+func fetchRepos(ctx context.Context, client githubv4.Client, org string, num int) ([]repo, error) {
+	var q struct {
+		Organization struct {
+			Repositories struct {
+				Nodes    []repo
+				PageInfo struct {
+					EndCursor   string
+					HasNextPage bool
+				}
+			} `graphql:"repositories(first: $first, after: $repositoriesCursor)"`
+		} `graphql:"organization(login: $login)"`
+	}
+	variables := map[string]interface{}{
+		"login":              githubv4.String(org),
+		"first":              githubv4.Int(num),
+		"repositoriesCursor": (*githubv4.String)(nil), // Null after argument to get first page.
+	}
+	var allRepos []repo
+	for {
+		err := client.Query(ctx, &q, variables)
+		if err != nil {
+			return allRepos, err
+		}
+		allRepos = append(allRepos, q.Organization.Repositories.Nodes...)
+		if !q.Organization.Repositories.PageInfo.HasNextPage {
+			break
+		}
+		variables["repositoriesCursor"] = githubv4.NewString(githubv4.String(q.Organization.Repositories.PageInfo.EndCursor))
+	}
+	return allRepos, nil
 }
 
 func printVersion(out io.Writer) error {
