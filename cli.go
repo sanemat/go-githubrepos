@@ -1,6 +1,7 @@
 package githubrepos
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"io"
@@ -44,6 +45,23 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	if *ver {
 		return printVersion(outStream)
 	}
+
+	src := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
+	httpClient := oauth2.NewClient(context.Background(), src)
+	client := githubv4.NewClient(httpClient)
+	var query struct {
+		Viewer struct {
+			Login     githubv4.String
+			CreatedAt githubv4.DateTime
+		}
+	}
+	err := client.Query(context.Background(), &query, nil)
+	if err != nil {
+		// Handle error.
+	}
+	fmt.Println("    Login:", query.Viewer.Login)
+	fmt.Println("CreatedAt:", query.Viewer.CreatedAt)
+
 	if *nullSeparator {
 		fmt.Print("Use null separator")
 	}
