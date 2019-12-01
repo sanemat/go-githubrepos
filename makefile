@@ -19,3 +19,11 @@ install-tools: download
 
 echo:
 	echo ${VERSION} ${BUILD_LDFLAGS}
+
+.PHONY: build
+build: download
+	go build -ldflags=$(BUILD_LDFLAGS) ./cmd/github-repos
+
+.PHONY: install
+install: download
+	go install -ldflags=$(BUILD_LDFLAGS) ./cmd/github-repos
