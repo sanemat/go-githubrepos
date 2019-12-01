@@ -6,10 +6,13 @@ import (
 	"io"
 	"log"
 
+	"github.com/shurcooL/githubv4"
+	"golang.org/x/oauth2"
 	"golang.org/x/xerrors"
 )
 
 const cmdName = "github-repos"
+
 // EnvGitHubTokenKey Key of GitHub Token on environment variables
 const EnvGitHubTokenKey = "GITHUB_TOKEN"
 
