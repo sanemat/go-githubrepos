@@ -4,12 +4,11 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io"
-	"log"
-
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 	"golang.org/x/xerrors"
+	"io"
+	"log"
 )
 
 const cmdName = "github-repos"
@@ -60,10 +59,24 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	if err != nil {
 		return err
 	}
-	fmt.Print(repos)
 
 	if *nullTerminators {
-		fmt.Print("Use null separator")
+		last := len(repos) - 1
+		for i, r := range repos {
+			fmt.Fprint(outStream, r.SSHURL)
+			if i != last {
+				fmt.Fprint(outStream, "\x00")
+			}
+		}
+	} else {
+		last := len(repos) - 1
+		for i, r := range repos {
+			if i == last {
+				fmt.Fprint(outStream, r.SSHURL)
+			} else {
+				fmt.Fprintln(outStream, r.SSHURL)
+			}
+		}
 	}
 
 	return nil
