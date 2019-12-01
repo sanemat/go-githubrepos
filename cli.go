@@ -37,6 +37,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		ver           = fs.Bool("version", false, "display version")
 		nullSeparator = fs.Bool("z", false, "use null separator")
 		org           = fs.String("org", "", "GitHub organization")
+		num           = fs.Int("num", 2, "numbers of repos")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -71,7 +72,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		}
 		variables := map[string]interface{}{
 			"login": githubv4.String(*org),
-			"first": githubv4.Int(2),
+			"first": githubv4.Int(*num),
 		}
 		err := client.Query(context.Background(), &q, variables)
 		if err != nil {
