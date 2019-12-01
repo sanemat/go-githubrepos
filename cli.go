@@ -49,24 +49,35 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	src := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
-	var query struct {
-		Viewer struct {
-			Login     githubv4.String
-			CreatedAt githubv4.DateTime
+
+	{
+		var q struct {
+			Organization struct {
+				Repositories struct {
+					Nodes []struct {
+						SSHURL string
+					}
+					PageInfo struct {
+						EndCursor   string
+						HasNextPage bool
+					}
+				} `graphql:"repositories(first: $first)"`
+			} `graphql:"organization(login: $login)"`
 		}
+		variables := map[string]interface{}{
+			"login": githubv4.String(*org),
+			"first": githubv4.Int(2),
+		}
+		err := client.Query(context.Background(), &q, variables)
+		if err != nil {
+			return err
+		}
+		fmt.Print(q.Organization.Repositories)
 	}
-	err := client.Query(context.Background(), &query, nil)
-	if err != nil {
-		return err
-	}
-	fmt.Println("    Login:", query.Viewer.Login)
-	fmt.Println("CreatedAt:", query.Viewer.CreatedAt)
 
 	if *nullSeparator {
 		fmt.Print("Use null separator")
 	}
-
-	fmt.Print(*org)
 
 	argv = fs.Args()
 	if len(argv) >= 1 {
