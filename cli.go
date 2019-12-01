@@ -4,12 +4,11 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io"
-	"log"
-
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 	"golang.org/x/xerrors"
+	"io"
+	"log"
 )
 
 const cmdName = "github-repos"
@@ -34,10 +33,10 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 
 	var (
-		ver           = fs.Bool("version", false, "display version")
-		nullSeparator = fs.Bool("z", false, "use null separator")
-		org           = fs.String("org", "github", "GitHub organization")
-		num           = fs.Int("num", 100, "repos per request")
+		ver             = fs.Bool("version", false, "display version")
+		nullTerminators = fs.Bool("z", false, "use NULs as output field terminators")
+		org             = fs.String("org", "github", "GitHub organization")
+		num             = fs.Int("num", 100, "repos per request")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -60,10 +59,24 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	if err != nil {
 		return err
 	}
-	fmt.Print(repos)
 
-	if *nullSeparator {
-		fmt.Print("Use null separator")
+	if *nullTerminators {
+		last := len(repos) - 1
+		for i, r := range repos {
+			fmt.Fprint(outStream, r.SSHURL)
+			if i != last {
+				fmt.Fprint(outStream, "\x00")
+			}
+		}
+	} else {
+		last := len(repos) - 1
+		for i, r := range repos {
+			if i == last {
+				fmt.Fprint(outStream, r.SSHURL)
+			} else {
+				fmt.Fprintln(outStream, r.SSHURL)
+			}
+		}
 	}
 
 	return nil
