@@ -57,7 +57,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 	err := client.Query(context.Background(), &query, nil)
 	if err != nil {
-		// Handle error.
+		return err
 	}
 	fmt.Println("    Login:", query.Viewer.Login)
 	fmt.Println("CreatedAt:", query.Viewer.CreatedAt)
