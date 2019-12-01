@@ -33,8 +33,12 @@ jobs:
       with:
         fetch-depth: 1
         path: go/src/github.com/${{ github.repository }}
-    - name: deps
+    - name: deps unix
+      run: make install-tools
+      if: "matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'"
+    - name: deps windows
       run: make download
+      if: "matrix.os == 'windows-latest'"
     - name: lint
       run: golint -set_exit_status ./...
       if: "matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'"
