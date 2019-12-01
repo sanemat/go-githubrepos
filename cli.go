@@ -57,12 +57,14 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	client := githubv4.NewClient(httpClient)
 
 	{
+		type repo struct {
+			SSHURL string
+		}
+
 		var q struct {
 			Organization struct {
 				Repositories struct {
-					Nodes []struct {
-						SSHURL string
-					}
+					Nodes    []repo
 					PageInfo struct {
 						EndCursor   string
 						HasNextPage bool
