@@ -69,18 +69,27 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 						EndCursor   string
 						HasNextPage bool
 					}
-				} `graphql:"repositories(first: $first)"`
+				} `graphql:"repositories(first: $first, after: $repositoriesCursor)"`
 			} `graphql:"organization(login: $login)"`
 		}
 		variables := map[string]interface{}{
-			"login": githubv4.String(*org),
-			"first": githubv4.Int(*num),
+			"login":              githubv4.String(*org),
+			"first":              githubv4.Int(*num),
+			"repositoriesCursor": (*githubv4.String)(nil), // Null after argument to get first page.
 		}
-		err := client.Query(context.Background(), &q, variables)
-		if err != nil {
-			return err
+		var allRepos []repo
+		for {
+			err := client.Query(context.Background(), &q, variables)
+			if err != nil {
+				return err
+			}
+			allRepos = append(allRepos, q.Organization.Repositories.Nodes...)
+			if !q.Organization.Repositories.PageInfo.HasNextPage {
+				break
+			}
+			variables["repositoriesCursor"] = githubv4.NewString(githubv4.String(q.Organization.Repositories.PageInfo.EndCursor))
 		}
-		fmt.Print(q.Organization.Repositories)
+		fmt.Print(allRepos)
 	}
 
 	if *nullSeparator {
