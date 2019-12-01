@@ -36,7 +36,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	var (
 		ver           = fs.Bool("version", false, "display version")
 		nullSeparator = fs.Bool("z", false, "use null separator")
-		org           = fs.String("org", "", "GitHub organization")
+		org           = fs.String("org", "github", "GitHub organization")
 		num           = fs.Int("num", 2, "numbers of repos")
 	)
 
