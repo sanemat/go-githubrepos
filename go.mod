@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/Songmu/gocredits v0.1.0
+	github.com/Songmu/goxz v0.5.0
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/git-chglog/git-chglog v0.0.0-20190923122001-6050f20bcdb0
