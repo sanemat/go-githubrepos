@@ -11,6 +11,7 @@ test: download
 download:
 	echo Download go.mod dependencies
 	go mod download
+	go mod tidy
 
 .PHONY: install-tools
 install-tools: download
