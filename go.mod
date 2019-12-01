@@ -3,6 +3,7 @@ module github.com/sanemat/go-githubrepos
 go 1.13
 
 require (
+	github.com/Songmu/gocredits v0.1.0
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/motemen/gobump v0.0.0-20190215161939-66ee926e4810
 	github.com/shurcooL/githubv4 v0.0.0-20191127044304-8f68eb5628d0
