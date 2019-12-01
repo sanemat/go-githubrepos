@@ -37,7 +37,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		ver           = fs.Bool("version", false, "display version")
 		nullSeparator = fs.Bool("z", false, "use null separator")
 		org           = fs.String("org", "github", "GitHub organization")
-		num           = fs.Int("num", 2, "repos per request")
+		num           = fs.Int("num", 100, "repos per request")
 	)
 
 	if err := fs.Parse(argv); err != nil {
