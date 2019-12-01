@@ -1,3 +1,9 @@
+# githubrepos
+
+## Design
+
+[design](./design.md)
+
 ## Changelog
 
 [chagelog](./changelog.md) by [git-chglog](https://github.com/git-chglog/git-chglog)
