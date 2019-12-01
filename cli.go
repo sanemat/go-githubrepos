@@ -46,6 +46,11 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		return printVersion(outStream)
 	}
 
+	argv = fs.Args()
+	if len(argv) >= 1 {
+		return xerrors.New("We have no subcommand")
+	}
+
 	src := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
@@ -77,11 +82,6 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 
 	if *nullSeparator {
 		fmt.Print("Use null separator")
-	}
-
-	argv = fs.Args()
-	if len(argv) >= 1 {
-		return xerrors.New("We have no subcommand")
 	}
 
 	return nil
