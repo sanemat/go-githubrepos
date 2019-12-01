@@ -34,10 +34,10 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 
 	var (
-		ver           = fs.Bool("version", false, "display version")
-		nullSeparator = fs.Bool("z", false, "use null separator")
-		org           = fs.String("org", "github", "GitHub organization")
-		num           = fs.Int("num", 100, "repos per request")
+		ver             = fs.Bool("version", false, "display version")
+		nullTerminators = fs.Bool("z", false, "use NULs as output field terminators")
+		org             = fs.String("org", "github", "GitHub organization")
+		num             = fs.Int("num", 100, "repos per request")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -62,7 +62,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 	fmt.Print(repos)
 
-	if *nullSeparator {
+	if *nullTerminators {
 		fmt.Print("Use null separator")
 	}
 
