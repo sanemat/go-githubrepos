@@ -28,3 +28,8 @@ build: download
 .PHONY: install
 install: download
 	go install -ldflags=$(BUILD_LDFLAGS) ./cmd/github-repos
+
+.PHONY: crossbuild
+crossbuild:
+	goxz -pv=v$(VERSION) -build-ldflags=$(BUILD_LDFLAGS) \
+      -os=linux,darwin,windows -d=./dist/v$(VERSION) ./cmd/*
