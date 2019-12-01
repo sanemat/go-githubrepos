@@ -34,11 +34,9 @@ jobs:
         fetch-depth: 1
         path: go/src/github.com/${{ github.repository }}
     - name: deps
-      run: go get ./...
+      run: make download
     - name: lint
-      run: |
-        go get golang.org/x/lint/golint
-        golint -set_exit_status ./...
+      run: golint -set_exit_status ./...
       if: "matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'"
     - name: test
       run: go test -coverprofile coverage.out -covermode atomic ./...
