@@ -37,7 +37,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		ver           = fs.Bool("version", false, "display version")
 		nullSeparator = fs.Bool("z", false, "use null separator")
 		org           = fs.String("org", "github", "GitHub organization")
-		num           = fs.Int("num", 2, "numbers of repos")
+		num           = fs.Int("num", 100, "repos per request")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -57,28 +57,39 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	client := githubv4.NewClient(httpClient)
 
 	{
+		type repo struct {
+			SSHURL string
+		}
+
 		var q struct {
 			Organization struct {
 				Repositories struct {
-					Nodes []struct {
-						SSHURL string
-					}
+					Nodes    []repo
 					PageInfo struct {
 						EndCursor   string
 						HasNextPage bool
 					}
-				} `graphql:"repositories(first: $first)"`
+				} `graphql:"repositories(first: $first, after: $repositoriesCursor)"`
 			} `graphql:"organization(login: $login)"`
 		}
 		variables := map[string]interface{}{
-			"login": githubv4.String(*org),
-			"first": githubv4.Int(*num),
+			"login":              githubv4.String(*org),
+			"first":              githubv4.Int(*num),
+			"repositoriesCursor": (*githubv4.String)(nil), // Null after argument to get first page.
 		}
-		err := client.Query(context.Background(), &q, variables)
-		if err != nil {
-			return err
+		var allRepos []repo
+		for {
+			err := client.Query(context.Background(), &q, variables)
+			if err != nil {
+				return err
+			}
+			allRepos = append(allRepos, q.Organization.Repositories.Nodes...)
+			if !q.Organization.Repositories.PageInfo.HasNextPage {
+				break
+			}
+			variables["repositoriesCursor"] = githubv4.NewString(githubv4.String(q.Organization.Repositories.PageInfo.EndCursor))
 		}
-		fmt.Print(q.Organization.Repositories)
+		fmt.Print(allRepos)
 	}
 
 	if *nullSeparator {
