@@ -3,17 +3,19 @@ CURRENT_REVISION = $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS = "-s -w -X github.com/sanemat/go-githubrepos.revision=$(CURRENT_REVISION)"
 u := $(if $(update),-u)
 
-.PHONY: deps
-deps:
-	go get ${u} -d
-	go mod tidy
-
-.PHONY: devel-deps
-devel-deps: deps
-	GO111MODULE=off go get ${u} \
-	  golang.org/x/lint/golint                  \
-	  github.com/motemen/gobump/cmd/gobump
-
 .PHONY: test
-test: deps
+test: download
 	go test
+
+.PHONY: download
+download:
+	echo Download go.mod dependencies
+	go mod download
+
+.PHONY: install-tools
+install-tools: download
+	echo Installing tools from tools.go
+	cat tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+
+echo:
+	echo ${VERSION} ${BUILD_LDFLAGS}
