@@ -33,3 +33,7 @@ install: download
 crossbuild:
 	goxz -pv=v$(VERSION) -build-ldflags=$(BUILD_LDFLAGS) \
       -os=linux,darwin,windows -d=./dist/v$(VERSION) ./cmd/*
+
+.PHONY: upload
+upload:
+	ghr v$(VERSION) dist/v$(VERSION)
