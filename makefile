@@ -37,3 +37,7 @@ crossbuild:
 .PHONY: upload
 upload:
 	ghr v$(VERSION) dist/v$(VERSION)
+
+.PHONY: credits
+credits:
+	gocredits . > credits.txt
