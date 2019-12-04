@@ -14,7 +14,7 @@ Only organization. Not user.
 ## Usage
 
 ```
-github-repos -org packsaddle -z | xargs --null -P 4 -I {} git clone {} --depth 1
+github-repos -org packsaddle -z | xargs -0 -P 4 -I {} git clone {} --depth 1
 ```
 
 required: `GITHUB_TOKEN=__YOUR_PERSONAL_TOKEN__`
