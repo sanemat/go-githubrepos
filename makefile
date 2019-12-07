@@ -9,14 +9,13 @@ test: download
 
 .PHONY: download
 download:
-	echo Download go.mod dependencies
 	go mod download
 	go mod tidy
 
 .PHONY: install-tools
 install-tools: download
-	echo Installing tools from tools.go
-	cat tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %
+	go install github.com/sanemat/go-xgoinstall/cmd/x-go-install
+	cat tools.go | grep _ | awk -F'"' '{print $$2}' | x-go-install
 
 echo:
 	echo ${VERSION} ${BUILD_LDFLAGS}
