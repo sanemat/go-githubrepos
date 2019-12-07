@@ -17,6 +17,10 @@ install-tools: download
 	go install github.com/sanemat/go-xgoinstall/cmd/x-go-install
 	cat tools.go | grep _ | awk -F'"' '{print $$2}' | x-go-install
 
+.PHONY: goimports
+goimports:
+	goimports -w .
+
 echo:
 	echo ${VERSION} ${BUILD_LDFLAGS}
 
