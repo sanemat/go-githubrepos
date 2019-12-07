@@ -14,6 +14,7 @@ require (
 	github.com/tcnksm/ghr v0.13.0
 	golang.org/x/lint v0.0.0-20191125180803-fdd1cda4f05f
 	golang.org/x/oauth2 v0.0.0-20191122200657-5d9234df094c
+	golang.org/x/tools v0.0.0-20191125144606-a911d9008d1f
 	golang.org/x/xerrors v0.0.0-20191011141410-1b5146add898
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
