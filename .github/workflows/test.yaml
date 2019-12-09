@@ -14,16 +14,11 @@ jobs:
         - macOS-latest
         - windows-latest
     steps:
-    - name: setup env unix
+    - name: setup env
       run: |
-        echo ::set-env name=GOPATH::${{ runner.workspace }}/go
-        echo ::add-path::${{ runner.workspace }}/go/bin
-      if: "matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'"
-    - name: setup env windows
-      run: |
-        echo ::set-env name=GOPATH::${{ runner.workspace }}\go
-        echo ::add-path::${{ runner.workspace }}\go\bin
-      if: "matrix.os == 'windows-latest'"
+        echo "::set-env name=GOPATH::$(go env GOPATH)/go"
+        echo "::add-path::$(go env GOPATH)/go/bin"
+      shell: bash
     - name: setup go
       uses: actions/setup-go@v1
       with:
