@@ -9,14 +9,15 @@ test: download
 
 .PHONY: download
 download:
-	go mod download
+	go mod download && \
 	go mod tidy
 
 .PHONY: install-tools
 install-tools: download
 	go install \
 	github.com/sanemat/go-xgoinstall/cmd/x-go-install \
-	github.com/sanemat/go-importlist/cmd/import-list
+	github.com/sanemat/go-importlist/cmd/import-list \
+	; \
 	import-list -z tools.go | x-go-install -0
 
 .PHONY: goimports
