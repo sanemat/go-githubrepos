@@ -2,8 +2,29 @@
 ## [Unreleased]
 
 
-<a name="0.1.0"></a>
-## 0.1.0 - 2019-12-03
+<a name="v0.1.1"></a>
+## [v0.1.1] - 2020-01-05
+### Code Refactoring
+- **tools:** use tools/tools.go
+
+### Pull Requests
+- Merge pull request [#45](https://github.com/sanemat/go-githubrepos/issues/45) from sanemat/chore/credits
+- Merge pull request [#44](https://github.com/sanemat/go-githubrepos/issues/44) from sanemat/chore/tools-go
+- Merge pull request [#43](https://github.com/sanemat/go-githubrepos/issues/43) from sanemat/chore/makefile
+- Merge pull request [#42](https://github.com/sanemat/go-githubrepos/issues/42) from sanemat/chore/dependabot
+- Merge pull request [#41](https://github.com/sanemat/go-githubrepos/issues/41) from sanemat/chore/yaml
+- Merge pull request [#40](https://github.com/sanemat/go-githubrepos/issues/40) from sanemat/chore/windows
+- Merge pull request [#39](https://github.com/sanemat/go-githubrepos/issues/39) from sanemat/chore/use-import-list
+- Merge pull request [#38](https://github.com/sanemat/go-githubrepos/issues/38) from sanemat/chore/windows
+- Merge pull request [#37](https://github.com/sanemat/go-githubrepos/issues/37) from sanemat/chore/ignore-binary
+- Merge pull request [#36](https://github.com/sanemat/go-githubrepos/issues/36) from sanemat/chore/goimports
+- Merge pull request [#35](https://github.com/sanemat/go-githubrepos/issues/35) from sanemat/chore/use-xgoinstall
+- Merge pull request [#34](https://github.com/sanemat/go-githubrepos/issues/34) from sanemat/chore/xargs-options
+- Merge pull request [#33](https://github.com/sanemat/go-githubrepos/issues/33) from sanemat/docs/readme-usage
+
+
+<a name="v0.1.0"></a>
+## v0.1.0 - 2019-12-03
 ### Features
 - **cli:** parse command
 - **cli:** no sub command
@@ -17,6 +38,9 @@
 - **output:** support separator
 
 ### Pull Requests
+- Merge pull request [#32](https://github.com/sanemat/go-githubrepos/issues/32) from sanemat/chore/credits
+- Merge pull request [#29](https://github.com/sanemat/go-githubrepos/issues/29) from sanemat/docs/changelog2
+- Merge pull request [#28](https://github.com/sanemat/go-githubrepos/issues/28) from sanemat/chore/ghr
 - Merge pull request [#25](https://github.com/sanemat/go-githubrepos/issues/25) from sanemat/chore/tools-goxz
 - Merge pull request [#24](https://github.com/sanemat/go-githubrepos/issues/24) from sanemat/chore/tools-changelog
 - Merge pull request [#23](https://github.com/sanemat/go-githubrepos/issues/23) from sanemat/chore/tools-gocredits
@@ -40,4 +64,5 @@
 - Merge pull request [#1](https://github.com/sanemat/go-githubrepos/issues/1) from sanemat/feat/cli
 
 
-[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v0.1.1...HEAD
+[v0.1.1]: https://github.com/sanemat/go-githubrepos/compare/v0.1.0...v0.1.1
