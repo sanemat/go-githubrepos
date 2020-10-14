@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: setup env unix
         run: |
-          echo ::set-env name=GOPATH::${{ runner.workspace }}/go
-          echo ::add-path::${{ runner.workspace }}/go/bin
+          echo "GOPATH=${{ runner.workspace }}/go" >> $GITHUB_ENV
+          echo "${{ runner.workspace }}/go/bin" >> $GITHUB_PATH
       - name: setup go
         uses: actions/setup-go@v1
         with:
