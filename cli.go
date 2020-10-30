@@ -38,6 +38,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		nullTerminators = fs.Bool("z", false, "use NULs as output field terminators")
 		org             = fs.String("org", "github", "GitHub organization")
 		num             = fs.Int("num", 100, "repos per request")
+		isArchived = fs.Int("isArchived", 0, "0: all, 1: only archived, 2: only non archived")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -56,7 +57,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
 
-	repos, err := fetchRepos(context.Background(), *client, *org, *num)
+	repos, err := fetchRepos(context.Background(), *client, *org, *num, *isArchived)
 	if err != nil {
 		return err
 	}
@@ -87,7 +88,7 @@ type repo struct {
 	SSHURL string
 }
 
-func fetchRepos(ctx context.Context, client githubv4.Client, org string, num int) ([]repo, error) {
+func fetchRepos(ctx context.Context, client githubv4.Client, org string, num int, isArchived int) ([]repo, error) {
 	var q struct {
 		Organization struct {
 			Repositories struct {
