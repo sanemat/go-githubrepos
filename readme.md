@@ -1,20 +1,16 @@
 # githubrepos
 
-List repos up on GitHub Organization.
+List repos up on GitHub Search.
 
 ## Overview
 
-`github-repos -z --org=yourorg` returns github ssh clone url on yourorg, split by NULL.
-This returns all repos.
-
-## Limitation
-
-Only organization. Not user.
+`github-repos -z -search "org:yourorg archived:false"` returns github ssh clone url on yourorg, split by NULL.
+This returns all non-archived repos.
 
 ## Usage
 
 ```
-github-repos -org packsaddle -z | xargs -0 -P 4 -I {} git clone {} --depth 1
+github-repos -search "org:packsaddle" -z | xargs -0 -P 4 -I {} git clone {} --depth 1
 ```
 
 required: `GITHUB_TOKEN=__YOUR_PERSONAL_TOKEN__`

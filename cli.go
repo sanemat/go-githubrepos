@@ -33,13 +33,12 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		return xerrors.Errorf("%s is required", EnvGitHubTokenKey)
 	}
 
-	var searchQuery *string
-
 	var (
 		ver             = fs.Bool("version", false, "display version")
 		nullTerminators = fs.Bool("z", false, "use NULs as output field terminators")
 		org             = fs.String("org", "", "GitHub organization")
 		num             = fs.Int("num", 100, "repos per request")
+		searchQuery     = fs.String("search", "", "GitHub search query")
 	)
 
 	if err := fs.Parse(argv); err != nil {
@@ -48,13 +47,13 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	if *ver {
 		return printVersion(outStream)
 	}
-	if *org != "" {
+	if *searchQuery == "" && *org != "" {
 		v := fmt.Sprintf("org:%s", *org)
 		searchQuery = &v
 	}
 
-	if searchQuery == nil || *searchQuery == "" {
-		return xerrors.New("search is required")
+	if *searchQuery == "" {
+		return xerrors.New("search or org is required")
 	}
 
 	argv = fs.Args()
