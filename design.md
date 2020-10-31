@@ -1,12 +1,8 @@
 # github-repos
 
-List repos up on GitHub Organization.
+List repos up on GitHub Search.
 
 ## Overview
 
-`github-repos -z --org=yourorg` returns github ssh clone url on yourorg, split by NULL.
-This returns all repos.
-
-## Limitation
-
-Only organization. Not user.
+`github-repos -z -search "org:yourorg archived:false"` returns github ssh clone url on yourorg, split by NULL.
+This returns all non-archived repos.
