@@ -33,10 +33,12 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 		return xerrors.Errorf("%s is required", EnvGitHubTokenKey)
 	}
 
+	var searchQuery *string
+
 	var (
 		ver             = fs.Bool("version", false, "display version")
 		nullTerminators = fs.Bool("z", false, "use NULs as output field terminators")
-		org             = fs.String("org", "github", "GitHub organization")
+		org             = fs.String("org", "", "GitHub organization")
 		num             = fs.Int("num", 100, "repos per request")
 	)
 
@@ -45,6 +47,14 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 	if *ver {
 		return printVersion(outStream)
+	}
+	if *org != "" {
+		v := fmt.Sprintf("org:%s", *org)
+		searchQuery = &v
+	}
+
+	if searchQuery == nil || *searchQuery == "" {
+		return xerrors.New("search is required")
 	}
 
 	argv = fs.Args()
@@ -56,7 +66,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
 
-	repos, err := fetchRepos(context.Background(), *client, *org, *num)
+	repos, err := fetchRepos(context.Background(), *client, *searchQuery, *num)
 	if err != nil {
 		return err
 	}
@@ -87,20 +97,22 @@ type repo struct {
 	SSHURL string
 }
 
-func fetchRepos(ctx context.Context, client githubv4.Client, org string, num int) ([]repo, error) {
+func fetchRepos(ctx context.Context, client githubv4.Client, searchQuery string, num int) ([]repo, error) {
 	var q struct {
-		Organization struct {
-			Repositories struct {
-				Nodes    []repo
-				PageInfo struct {
-					EndCursor   string
-					HasNextPage bool
+		Search struct {
+			PageInfo struct {
+				EndCursor   string
+				HasNextPage bool
+			}
+			Edges []struct {
+				Node struct {
+					Repository repo `graphql:"... on Repository"`
 				}
-			} `graphql:"repositories(first: $first, after: $repositoriesCursor)"`
-		} `graphql:"organization(login: $login)"`
+			}
+		} `graphql:"search(query: $searchQuery, type: REPOSITORY, first: $first, after: $repositoriesCursor)"`
 	}
 	variables := map[string]interface{}{
-		"login":              githubv4.String(org),
+		"searchQuery":        githubv4.String(searchQuery),
 		"first":              githubv4.Int(num),
 		"repositoriesCursor": (*githubv4.String)(nil), // Null after argument to get first page.
 	}
@@ -110,11 +122,13 @@ func fetchRepos(ctx context.Context, client githubv4.Client, org string, num int
 		if err != nil {
 			return allRepos, err
 		}
-		allRepos = append(allRepos, q.Organization.Repositories.Nodes...)
-		if !q.Organization.Repositories.PageInfo.HasNextPage {
+		for _, edge := range q.Search.Edges {
+			allRepos = append(allRepos, edge.Node.Repository)
+		}
+		if !q.Search.PageInfo.HasNextPage {
 			break
 		}
-		variables["repositoriesCursor"] = githubv4.NewString(githubv4.String(q.Organization.Repositories.PageInfo.EndCursor))
+		variables["repositoriesCursor"] = githubv4.NewString(githubv4.String(q.Search.PageInfo.EndCursor))
 	}
 	return allRepos, nil
 }
