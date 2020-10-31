@@ -1,5 +1,5 @@
 package githubrepos
 
-const version = "0.1.2"
+const version = "1.0.0"
 
 var revision = "HEAD"
