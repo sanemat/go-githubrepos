@@ -2,6 +2,18 @@
 ## [Unreleased]
 
 
+<a name="v0.1.2"></a>
+## [v0.1.2] - 2020-10-31
+### Features
+- **search:** use search api
+
+### Pull Requests
+- Merge pull request [#54](https://github.com/sanemat/go-githubrepos/issues/54) from sanemat/feat/search
+- Merge pull request [#51](https://github.com/sanemat/go-githubrepos/issues/51) from sanemat/sanemat-patch-1
+- Merge pull request [#50](https://github.com/sanemat/go-githubrepos/issues/50) from sanemat/chore/actions-env
+- Merge pull request [#49](https://github.com/sanemat/go-githubrepos/issues/49) from sanemat/sanemat-patch-1
+
+
 <a name="v0.1.1"></a>
 ## [v0.1.1] - 2020-01-05
 ### Code Refactoring
@@ -64,5 +76,6 @@
 - Merge pull request [#1](https://github.com/sanemat/go-githubrepos/issues/1) from sanemat/feat/cli
 
 
-[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v0.1.2...HEAD
+[v0.1.2]: https://github.com/sanemat/go-githubrepos/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/sanemat/go-githubrepos/compare/v0.1.0...v0.1.1
