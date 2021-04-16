@@ -2,6 +2,20 @@
 ## [Unreleased]
 
 
+<a name="v1.1.0"></a>
+## [v1.1.0] - 2021-04-16
+
+### Dependencies
+
+- Bump dependencies
+
+### Pull Requests
+- Merge pull request [#61](https://github.com/sanemat/go-githubrepos/issues/61) from sanemat/chore/deps
+- Merge pull request [#60](https://github.com/sanemat/go-githubrepos/issues/60) from sanemat/chore/deps-tools
+- Merge pull request [#59](https://github.com/sanemat/go-githubrepos/issues/59) from sanemat/chore/update-dependencies
+- Merge pull request [#57](https://github.com/sanemat/go-githubrepos/issues/57) from sanemat/chore/change-to-main
+
+
 <a name="v1.0.0"></a>
 ## [v1.0.0] - 2020-10-31
 ### Features
@@ -85,7 +99,8 @@
 - Merge pull request [#1](https://github.com/sanemat/go-githubrepos/issues/1) from sanemat/feat/cli
 
 
-[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/sanemat/go-githubrepos/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/sanemat/go-githubrepos/compare/v0.1.2...v1.0.0
 [v0.1.2]: https://github.com/sanemat/go-githubrepos/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/sanemat/go-githubrepos/compare/v0.1.0...v0.1.1
