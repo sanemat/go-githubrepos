@@ -17,17 +17,14 @@ require (
 	github.com/manifoldco/promptui v0.8.0 // indirect
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/mitchellh/copystructure v1.1.2 // indirect
-	github.com/motemen/gobump v0.0.0-20191229024723-40a93df16ab5 // indirect
 	github.com/nwaples/rardecode v1.1.0 // indirect
 	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/sanemat/go-importlist v0.1.2
+	github.com/sanemat/go-importlist v0.2.0
 	github.com/sanemat/go-xgoinstall v0.1.1
 	github.com/tcnksm/ghr v0.13.0
 	github.com/trivago/tgo v1.0.7 // indirect
-	github.com/tsuyoshiwada/go-gitcmd v0.0.0-20180205145712-5f1f5f9475df // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
-	github.com/urfave/cli v1.22.5 // indirect
 	github.com/x-motemen/gobump v0.2.0
 	golang.org/x/crypto v0.0.0-20210415154028-4f45737414dc // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5
@@ -39,6 +36,4 @@ require (
 	golang.org/x/term v0.0.0-20210406210042-72f3dc4e9b72 // indirect
 	golang.org/x/tools v0.1.0
 	google.golang.org/appengine v1.6.7 // indirect
-	gopkg.in/AlecAivazis/survey.v1 v1.8.8 // indirect
-	gopkg.in/kyokomi/emoji.v1 v1.5.1 // indirect
 )
