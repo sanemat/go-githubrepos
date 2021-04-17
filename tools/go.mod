@@ -21,7 +21,7 @@ require (
 	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/sanemat/go-importlist v0.2.0
-	github.com/sanemat/go-xgoinstall v0.1.1
+	github.com/sanemat/go-xgoinstall v0.2.0
 	github.com/tcnksm/ghr v0.13.0
 	github.com/trivago/tgo v1.0.7 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
