@@ -7,7 +7,7 @@ require (
 	github.com/Songmu/goxz v0.7.0
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
-	github.com/git-chglog/git-chglog v0.14.1
+	github.com/git-chglog/git-chglog v0.14.2
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
