@@ -7,7 +7,7 @@ require (
 	github.com/Songmu/goxz v0.7.0
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
-	github.com/git-chglog/git-chglog v0.14.2
+	github.com/git-chglog/git-chglog v0.15.0
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
@@ -25,6 +25,5 @@ require (
 	github.com/x-motemen/gobump v0.2.0
 	golang.org/x/crypto v0.0.0-20210415154028-4f45737414dc // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5
-	golang.org/x/term v0.0.0-20210406210042-72f3dc4e9b72 // indirect
 	golang.org/x/tools v0.1.5
 )
