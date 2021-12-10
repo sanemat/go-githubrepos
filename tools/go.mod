@@ -25,5 +25,5 @@ require (
 	github.com/x-motemen/gobump v0.2.0
 	golang.org/x/crypto v0.0.0-20210415154028-4f45737414dc // indirect
 	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5
-	golang.org/x/tools v0.1.7
+	golang.org/x/tools v0.1.8
 )
