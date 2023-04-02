@@ -15,5 +15,5 @@ require (
 	github.com/tcnksm/ghr v0.16.0
 	github.com/x-motemen/gobump v0.2.0
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
-	golang.org/x/tools v0.1.12
+	golang.org/x/tools v0.7.0
 )
