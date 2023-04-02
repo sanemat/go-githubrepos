@@ -44,8 +44,8 @@ github.com/Masterminds/sprig/v3 v3.2.2 h1:17jRggJu518dr3QaafizSXOjKYp94wKfABxUmy
 github.com/Masterminds/sprig/v3 v3.2.2/go.mod h1:UoaO7Yp8KlPnJIYWTFkMaqPUYKTfGFPhxNuwnnxkKlk=
 github.com/Netflix/go-expect v0.0.0-20180615182759-c93bf25de8e8 h1:xzYJEypr/85nBpB11F9br+3HUrpgb+fcm5iADzXXYEw=
 github.com/Netflix/go-expect v0.0.0-20180615182759-c93bf25de8e8/go.mod h1:oX5x61PbNXchhh0oikYAH+4Pcfw5LKv21+Jnpr6r6Pc=
-github.com/Songmu/gocredits v0.2.0 h1:AbvFKEbwP5/0qisF0cTlUwVuCtzbJG+ynsXuEUC98vI=
-github.com/Songmu/gocredits v0.2.0/go.mod h1:JBywHzwOmBMF9uidu1EgS3mwVNqZCKOPLPrFd1h7qQo=
+github.com/Songmu/gocredits v0.3.0 h1:BOredmhBQhrZjanpQpTWVl7aCuQW83Sea85kA0E9lOs=
+github.com/Songmu/gocredits v0.3.0/go.mod h1:GGUAT/3BmUVgvfHxm07agU6Zz+ZSeGg5gvqN6N/CxH0=
 github.com/Songmu/goxz v0.9.1 h1:dVb4N7r2jD1XcQ7o7jMfmMfwhLZQEM7OaO6iHDBLiXc=
 github.com/Songmu/goxz v0.9.1/go.mod h1:C7rRvbuMJC2o6TdSEjqDlup7oX31Fj8/J2Y5d+6Shss=
 github.com/Songmu/retry v0.1.0 h1:hPA5xybQsksLR/ry/+t/7cFajPW+dqjmjhzZhioBILA=

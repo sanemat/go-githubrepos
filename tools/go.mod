@@ -3,7 +3,7 @@ module github.com/sanemat/go-githubrepos/tools
 go 1.13
 
 require (
-	github.com/Songmu/gocredits v0.2.0
+	github.com/Songmu/gocredits v0.3.0
 	github.com/Songmu/goxz v0.9.1
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/git-chglog/git-chglog v0.15.1
