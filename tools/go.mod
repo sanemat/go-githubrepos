@@ -12,8 +12,8 @@ require (
 	github.com/mitchellh/copystructure v1.1.2 // indirect
 	github.com/sanemat/go-importlist v0.2.0
 	github.com/sanemat/go-xgoinstall v0.2.0
-	github.com/tcnksm/ghr v0.15.0
+	github.com/tcnksm/ghr v0.16.0
 	github.com/x-motemen/gobump v0.2.0
-	golang.org/x/lint v0.0.0-20201208152925-83fdc39ff7b5
+	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
 	golang.org/x/tools v0.1.12
 )
