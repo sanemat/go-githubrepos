@@ -2,13 +2,43 @@
 ## [Unreleased]
 
 
+<a name="v1.1.1"></a>
+## [v1.1.1] - 2023-04-02
+### Pull Requests
+- Merge pull request [#105](https://github.com/sanemat/go-githubrepos/issues/105) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.7.0
+- Merge pull request [#94](https://github.com/sanemat/go-githubrepos/issues/94) from sanemat/dependabot/go_modules/tools/github.com/tcnksm/ghr-0.16.0
+- Merge pull request [#102](https://github.com/sanemat/go-githubrepos/issues/102) from sanemat/dependabot/go_modules/tools/github.com/git-chglog/git-chglog-0.15.4
+- Merge pull request [#93](https://github.com/sanemat/go-githubrepos/issues/93) from sanemat/dependabot/go_modules/tools/github.com/Songmu/gocredits-0.3.0
+- Merge pull request [#91](https://github.com/sanemat/go-githubrepos/issues/91) from sanemat/dependabot/go_modules/tools/github.com/Songmu/goxz-0.9.1
+- Merge pull request [#92](https://github.com/sanemat/go-githubrepos/issues/92) from sanemat/dependabot/go_modules/tools/github.com/tcnksm/ghr-0.15.0
+- Merge pull request [#90](https://github.com/sanemat/go-githubrepos/issues/90) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.12
+- Merge pull request [#89](https://github.com/sanemat/go-githubrepos/issues/89) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.11
+- Merge pull request [#88](https://github.com/sanemat/go-githubrepos/issues/88) from sanemat/dependabot/go_modules/tools/github.com/Songmu/goxz-0.8.2
+- Merge pull request [#87](https://github.com/sanemat/go-githubrepos/issues/87) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.10
+- Merge pull request [#86](https://github.com/sanemat/go-githubrepos/issues/86) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.9
+- Merge pull request [#85](https://github.com/sanemat/go-githubrepos/issues/85) from sanemat/dependabot/go_modules/tools/github.com/Songmu/goxz-0.8.1
+- Merge pull request [#83](https://github.com/sanemat/go-githubrepos/issues/83) from sanemat/dependabot/go_modules/tools/github.com/git-chglog/git-chglog-0.15.1
+- Merge pull request [#82](https://github.com/sanemat/go-githubrepos/issues/82) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.8
+- Merge pull request [#81](https://github.com/sanemat/go-githubrepos/issues/81) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.7
+- Merge pull request [#79](https://github.com/sanemat/go-githubrepos/issues/79) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.6
+- Merge pull request [#77](https://github.com/sanemat/go-githubrepos/issues/77) from sanemat/dependabot/go_modules/tools/github.com/git-chglog/git-chglog-0.15.0
+- Merge pull request [#78](https://github.com/sanemat/go-githubrepos/issues/78) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.5
+- Merge pull request [#76](https://github.com/sanemat/go-githubrepos/issues/76) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.4
+- Merge pull request [#75](https://github.com/sanemat/go-githubrepos/issues/75) from sanemat/dependabot/go_modules/tools/github.com/tcnksm/ghr-0.14.0
+- Merge pull request [#74](https://github.com/sanemat/go-githubrepos/issues/74) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.3
+- Merge pull request [#73](https://github.com/sanemat/go-githubrepos/issues/73) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.2
+- Merge pull request [#72](https://github.com/sanemat/go-githubrepos/issues/72) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.1.1
+- Merge pull request [#71](https://github.com/sanemat/go-githubrepos/issues/71) from sanemat/sanemat-patch-1
+- Merge pull request [#70](https://github.com/sanemat/go-githubrepos/issues/70) from sanemat/dependabot/add-v2-config-file
+- Merge pull request [#69](https://github.com/sanemat/go-githubrepos/issues/69) from sanemat/chore/tools-order
+- Merge pull request [#68](https://github.com/sanemat/go-githubrepos/issues/68) from sanemat/chore/go-mod-tidy-2
+- Merge pull request [#67](https://github.com/sanemat/go-githubrepos/issues/67) from sanemat/chore/deps-git-chglog
+- Merge pull request [#66](https://github.com/sanemat/go-githubrepos/issues/66) from sanemat/chore/deps-go-xgoinstall
+- Merge pull request [#65](https://github.com/sanemat/go-githubrepos/issues/65) from sanemat/chore/deps-go-importlist
+
+
 <a name="v1.1.0"></a>
 ## [v1.1.0] - 2021-04-16
-
-### Dependencies
-
-- Bump dependencies
-
 ### Pull Requests
 - Merge pull request [#61](https://github.com/sanemat/go-githubrepos/issues/61) from sanemat/chore/deps
 - Merge pull request [#60](https://github.com/sanemat/go-githubrepos/issues/60) from sanemat/chore/deps-tools
@@ -61,12 +91,12 @@
 <a name="v0.1.0"></a>
 ## v0.1.0 - 2019-12-03
 ### Features
-- **cli:** parse command
-- **cli:** no sub command
 - **cli:** get all repositories
 - **cli:** num option
 - **cli:** show ssh url
 - **cli:** use GITHUB_TOKEN
+- **cli:** parse command
+- **cli:** no sub command
 - **cli:** init
 - **main:** main
 - **makefile:** use makefile
@@ -99,7 +129,8 @@
 - Merge pull request [#1](https://github.com/sanemat/go-githubrepos/issues/1) from sanemat/feat/cli
 
 
-[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.1...HEAD
+[v1.1.1]: https://github.com/sanemat/go-githubrepos/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/sanemat/go-githubrepos/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/sanemat/go-githubrepos/compare/v0.1.2...v1.0.0
 [v0.1.2]: https://github.com/sanemat/go-githubrepos/compare/v0.1.1...v0.1.2
