@@ -10,7 +10,7 @@ require (
 	github.com/manifoldco/promptui v0.8.0 // indirect
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/mitchellh/copystructure v1.1.2 // indirect
-	github.com/sanemat/go-importlist v0.2.0
+	github.com/sanemat/go-importlist v0.2.1
 	github.com/sanemat/go-xgoinstall v0.2.1
 	github.com/tcnksm/ghr v0.16.0
 	github.com/x-motemen/gobump v0.2.0
