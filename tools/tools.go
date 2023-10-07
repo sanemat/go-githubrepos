@@ -3,7 +3,6 @@
 package tools
 
 import (
-	_ "github.com/Songmu/goxz/cmd/goxz"
 	_ "github.com/git-chglog/git-chglog/cmd/git-chglog"
 	_ "github.com/sanemat/go-importlist/cmd/import-list"
 	_ "github.com/sanemat/go-xgoinstall/cmd/x-go-install"
