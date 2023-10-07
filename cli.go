@@ -2,6 +2,7 @@ package githubrepos
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -9,7 +10,6 @@ import (
 
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
-	"golang.org/x/xerrors"
 )
 
 const cmdName = "github-repos"
@@ -30,7 +30,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 
 	if token == "" {
-		return xerrors.Errorf("%s is required", EnvGitHubTokenKey)
+		return fmt.Errorf("%s is required", EnvGitHubTokenKey)
 	}
 
 	var (
@@ -42,7 +42,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	)
 
 	if err := fs.Parse(argv); err != nil {
-		return err
+		return fmt.Errorf("failed to fs.Parse: %w", err)
 	}
 	if *ver {
 		return printVersion(outStream)
@@ -53,12 +53,12 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 	}
 
 	if *searchQuery == "" {
-		return xerrors.New("search or org is required")
+		return errors.New("search or org is required")
 	}
 
 	argv = fs.Args()
 	if len(argv) >= 1 {
-		return xerrors.New("We have no subcommand")
+		return errors.New("it has no subcommand")
 	}
 
 	src := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
@@ -67,7 +67,7 @@ func Run(argv []string, token string, outStream, errStream io.Writer) error {
 
 	repos, err := fetchRepos(context.Background(), *client, *searchQuery, *num)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to fetchRepos: %w", err)
 	}
 
 	if *nullTerminators {
@@ -119,7 +119,7 @@ func fetchRepos(ctx context.Context, client githubv4.Client, searchQuery string,
 	for {
 		err := client.Query(ctx, &q, variables)
 		if err != nil {
-			return allRepos, err
+			return allRepos, fmt.Errorf("failed to client.Query: %w", err)
 		}
 		for _, edge := range q.Search.Edges {
 			allRepos = append(allRepos, edge.Node.Repository)
@@ -134,5 +134,5 @@ func fetchRepos(ctx context.Context, client githubv4.Client, searchQuery string,
 
 func printVersion(out io.Writer) error {
 	_, err := fmt.Fprintf(out, "%s v%s (rev:%s)\n", cmdName, version, revision)
-	return err
+	return fmt.Errorf("failed to fmt.Fprintf: %w", err)
 }
