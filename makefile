@@ -46,4 +46,4 @@ credits.txt:
 
 .PHONY: changelog
 changelog:
-	git-chglog -o changelog.md --next-tag v$(VERSION)
+	go run github.com/git-chglog/git-chglog/cmd/git-chglog@v0.15.4 -o changelog.md --next-tag v$(VERSION)
