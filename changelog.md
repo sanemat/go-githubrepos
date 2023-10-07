@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="v1.1.3"></a>
+## [v1.1.3] - 2023-10-07
+### Pull Requests
+- Merge pull request [#134](https://github.com/sanemat/go-githubrepos/issues/134) from sanemat/chore/drop-tools-2
+
+
 <a name="v1.1.2"></a>
 ## [v1.1.2] - 2023-10-07
 ### Pull Requests
@@ -153,7 +159,8 @@
 - Merge pull request [#1](https://github.com/sanemat/go-githubrepos/issues/1) from sanemat/feat/cli
 
 
-[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.3...HEAD
+[v1.1.3]: https://github.com/sanemat/go-githubrepos/compare/v1.1.2...v1.1.3
 [v1.1.2]: https://github.com/sanemat/go-githubrepos/compare/v1.1.1...v1.1.2
 [v1.1.1]: https://github.com/sanemat/go-githubrepos/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/sanemat/go-githubrepos/compare/v1.0.0...v1.1.0
