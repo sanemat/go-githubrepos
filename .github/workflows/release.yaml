@@ -20,8 +20,6 @@ jobs:
         with:
           fetch-depth: 1
           path: go/src/github.com/${{ github.repository }}
-      - name: deps unix
-        run: make install-tools
       - name: release
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
