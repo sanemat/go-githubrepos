@@ -42,7 +42,7 @@ upload:
 
 .PHONY: credits.txt
 credits.txt:
-	gocredits . > credits.txt
+	go run github.com/Songmu/gocredits/cmd/gocredits@v0.3.0 . > credits.txt
 
 .PHONY: changelog
 changelog:
