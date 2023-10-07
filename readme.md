@@ -31,9 +31,8 @@ I tried [caarlos0/clone-org](https://github.com/caarlos0/clone-org), but sometim
 ### ghg
 `ghg get sanemat/go-githubrepos`
 
-### go get
-`go get https://github.com/sanemat/go-githubrepos/cmd/github-repos
-`
+### go install
+`go install github.com/sanemat/go-githubrepos/cmd/github-repos@latest`
 
 ## Design
 
