@@ -2,6 +2,30 @@
 ## [Unreleased]
 
 
+<a name="v1.1.2"></a>
+## [v1.1.2] - 2023-10-07
+### Pull Requests
+- Merge pull request [#133](https://github.com/sanemat/go-githubrepos/issues/133) from sanemat/chore/drop-tools
+- Merge pull request [#132](https://github.com/sanemat/go-githubrepos/issues/132) from sanemat/chore/dev-deps-ghr-a
+- Merge pull request [#131](https://github.com/sanemat/go-githubrepos/issues/131) from sanemat/chore/dev-deps-git-chglog
+- Merge pull request [#129](https://github.com/sanemat/go-githubrepos/issues/129) from sanemat/chore/deps-gobump
+- Merge pull request [#128](https://github.com/sanemat/go-githubrepos/issues/128) from sanemat/chore/deps-goxz
+- Merge pull request [#127](https://github.com/sanemat/go-githubrepos/issues/127) from sanemat/chore/go-credits
+- Merge pull request [#126](https://github.com/sanemat/go-githubrepos/issues/126) from sanemat/chore/go-mod-edit-1-21-a
+- Merge pull request [#124](https://github.com/sanemat/go-githubrepos/issues/124) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.14.0
+- Merge pull request [#125](https://github.com/sanemat/go-githubrepos/issues/125) from sanemat/dependabot/go_modules/golang.org/x/oauth2-0.13.0
+- Merge pull request [#122](https://github.com/sanemat/go-githubrepos/issues/122) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.13.0
+- Merge pull request [#123](https://github.com/sanemat/go-githubrepos/issues/123) from sanemat/dependabot/go_modules/golang.org/x/oauth2-0.12.0
+- Merge pull request [#121](https://github.com/sanemat/go-githubrepos/issues/121) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.12.0
+- Merge pull request [#120](https://github.com/sanemat/go-githubrepos/issues/120) from sanemat/dependabot/go_modules/golang.org/x/oauth2-0.11.0
+- Merge pull request [#112](https://github.com/sanemat/go-githubrepos/issues/112) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.9.1
+- Merge pull request [#109](https://github.com/sanemat/go-githubrepos/issues/109) from sanemat/dependabot/go_modules/golang.org/x/oauth2-0.7.0
+- Merge pull request [#104](https://github.com/sanemat/go-githubrepos/issues/104) from sanemat/dependabot/go_modules/golang.org/x/net-0.7.0
+- Merge pull request [#110](https://github.com/sanemat/go-githubrepos/issues/110) from sanemat/dependabot/go_modules/tools/golang.org/x/tools-0.8.0
+- Merge pull request [#107](https://github.com/sanemat/go-githubrepos/issues/107) from sanemat/dependabot/go_modules/tools/github.com/sanemat/go-importlist-0.2.1
+- Merge pull request [#108](https://github.com/sanemat/go-githubrepos/issues/108) from sanemat/dependabot/go_modules/tools/github.com/sanemat/go-xgoinstall-0.2.1
+
+
 <a name="v1.1.1"></a>
 ## [v1.1.1] - 2023-04-02
 ### Pull Requests
@@ -129,7 +153,8 @@
 - Merge pull request [#1](https://github.com/sanemat/go-githubrepos/issues/1) from sanemat/feat/cli
 
 
-[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/sanemat/go-githubrepos/compare/v1.1.2...HEAD
+[v1.1.2]: https://github.com/sanemat/go-githubrepos/compare/v1.1.1...v1.1.2
 [v1.1.1]: https://github.com/sanemat/go-githubrepos/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/sanemat/go-githubrepos/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/sanemat/go-githubrepos/compare/v0.1.2...v1.0.0
