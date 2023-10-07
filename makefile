@@ -12,14 +12,6 @@ download:
 	go mod download && \
 	go mod tidy
 
-.PHONY: install-tools
-install-tools: download
-	$(MAKE) --directory=tools install-tools
-
-.PHONY: goimports
-goimports:
-	goimports -w .
-
 echo:
 	echo ${VERSION} ${BUILD_LDFLAGS}
 
