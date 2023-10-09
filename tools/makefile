@@ -4,8 +4,8 @@ download/gobump:
 
 .PHONY: extract/gobump
 extract/gobump:
-	tar -xzvf ../temp/gobump_v0.2.0_linux_amd64.tar.gz -C ../bin
+	tar -xzvf ../temp/gobump_v0.2.0_linux_amd64.tar.gz -C ../temp
 
 .PHONY: install/gobump
 install/gobump:
-	cp ../bin/gobump_v0.2.0_linux_amd64/gobump ../bin/.
+	cp ../temp/gobump_v0.2.0_linux_amd64/gobump ../bin/.
