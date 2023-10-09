@@ -24,10 +24,7 @@ jobs:
           echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
         shell: bash
       - name: checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-          path: src/github.com/${{ github.repository }}
+        uses: actions/checkout@v2
       - name: deps
         run: make install-tools
       - name: test
