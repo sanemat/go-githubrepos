@@ -1,4 +1,4 @@
-VERSION = $(shell go run github.com/x-motemen/gobump/cmd/gobump@v0.2.0 show -r)
+VERSION = $(shell ./bin/gobump show -r)
 CURRENT_REVISION = $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS = "-s -w -X github.com/sanemat/go-githubrepos.revision=$(CURRENT_REVISION)"
 u := $(if $(update),-u)
@@ -7,10 +7,17 @@ u := $(if $(update),-u)
 test: download
 	go test
 
-.PHONY: download
-download:
-	go mod download && \
-	go mod tidy
+.PHONY: go/mod/tidy
+go/mod/tidy:
+	go mod tidy -compat=$(shell go list -m -f {{.GoVersion}})
+
+.PHONY: go/mod/tidy-r
+go/mod/tidy-r: go/mod/tidy
+	$(MAKE) --directory=tools go/mod/tidy
+
+.PHONY: install-tools
+install-tools:
+	$(MAKE) --directory=tools install-tools
 
 echo:
 	echo ${VERSION} ${BUILD_LDFLAGS}
