@@ -1,11 +1,11 @@
 OS_NAME := $(shell uname -s | tr A-Z a-z)
-ARCH_NAME := "amd64"
-ifeq ($(OS_NAME), "linux")
-	OS_PATH := "linux"
-else ifeq ($(OS_NAME), "darwin")
-	OS_PATH := "darwin"
+ARCH_NAME := amd64
+ifeq ($(OS_NAME), linux)
+	OS_PATH := linux
+else ifeq ($(OS_NAME), darwin)
+	OS_PATH := darwin
 else
-	OS_PATH := "windows"
+	OS_PATH := windows
 endif
 
 .PHONY: download/gobump
