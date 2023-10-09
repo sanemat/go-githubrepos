@@ -1,6 +1,6 @@
 .PHONY: download/gobump
 download/gobump:
-	curl -O -L --output-dir ../temp https://github.com/x-motemen/gobump/releases/download/$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_linux_amd64.tar.gz
+	mkdir -p ../temp && curl -O -L --output-dir ../temp https://github.com/x-motemen/gobump/releases/download/$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_linux_amd64.tar.gz
 
 .PHONY: extract/gobump
 extract/gobump:
@@ -8,7 +8,7 @@ extract/gobump:
 
 .PHONY: copy/gobump
 copy/gobump:
-	cp ../temp/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_linux_amd64/gobump ../bin/.
+	mkdir -p ../bin && cp ../temp/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_linux_amd64/gobump ../bin/.
 
 .PHONY: install/gobump
 install/gobump: download/gobump extract/gobump copy/gobump
