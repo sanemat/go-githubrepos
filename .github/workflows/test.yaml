@@ -32,7 +32,7 @@ jobs:
       - name: test
         run: go test -coverprofile coverage.out -covermode atomic ./...
       - name: Convert coverage to lcov
-        uses: jandelgado/gcov2lcov-action@v1.0.0
+        uses: jandelgado/gcov2lcov-action@v1.0.9
         with:
           infile: coverage.out
           outfile: coverage.lcov
