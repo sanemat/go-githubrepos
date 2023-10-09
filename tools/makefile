@@ -19,7 +19,8 @@ install/gobump: download/gobump extract/gobump copy/gobump
 install-tools: install/gobump
 
 .PHONY: go/mod/tidy
-go/mod/tidy: go mod tidy -compat=$(shell go list -m -f {{.GoVersion}})
+go/mod/tidy:
+	go mod tidy -compat=$(shell go list -m -f {{.GoVersion}})
 
 .PHONY: echo/os-name
 echo/os-name:
