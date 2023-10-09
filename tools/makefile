@@ -1,3 +1,5 @@
+OS_NAME := $(shell uname -s | tr A-Z a-z)
+
 .PHONY: download/gobump
 download/gobump:
 	mkdir -p ../temp && curl -O -L --output-dir ../temp https://github.com/x-motemen/gobump/releases/download/$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_linux_amd64.tar.gz
@@ -18,3 +20,7 @@ install-tools: install/gobump
 
 .PHONY: go/mod/tidy
 go/mod/tidy: go mod tidy -compat=$(shell go list -m -f {{.GoVersion}})
+
+.PHONY: echo/os-name
+echo/os-name:
+	echo $(OS_NAME)
