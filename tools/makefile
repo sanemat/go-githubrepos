@@ -24,7 +24,7 @@ extract/gobump:
 else
 .PHONY: extract/gobump
 extract/gobump:
-	unzip -fo ../temp/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_$(OS_PATH)_$(ARCH_NAME).$(ARCHIVE_EXT) -d ../temp
+	unzip ../temp/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_$(OS_PATH)_$(ARCH_NAME).$(ARCHIVE_EXT) -d ../temp
 endif
 
 .PHONY: copy/gobump
