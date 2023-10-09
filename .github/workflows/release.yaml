@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: setup env unix
         run: |
-          echo "GOPATH=${{ runner.workspace }}/go" >> $GITHUB_ENV
-          echo "${{ runner.workspace }}/go/bin" >> $GITHUB_PATH
+          echo "GOPATH=$(go env GOPATH)" >> $GITHUB_ENV
+          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
       - name: setup go
         uses: actions/setup-go@v3
         with:
