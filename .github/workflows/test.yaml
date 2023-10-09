@@ -28,6 +28,8 @@ jobs:
         with:
           fetch-depth: 1
           path: src/github.com/${{ github.repository }}
+      - name: deps
+        run: make install-tools
       - name: test
         run: go test -coverprofile coverage.out -covermode atomic ./...
       - name: Convert coverage to lcov
