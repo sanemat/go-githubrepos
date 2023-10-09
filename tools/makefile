@@ -7,14 +7,19 @@ else ifeq ($(OS_NAME), darwin)
 else
 	OS_PATH := windows
 endif
+ifeq ($(OS_NAME), linux)
+	ARCHIVE_EXT := "tar.gz"
+else
+	ARCHIVE_EXT := "zip"
+endif
 
 .PHONY: download/gobump
 download/gobump:
-	mkdir -p ../temp && curl -O -L --output-dir ../temp https://github.com/x-motemen/gobump/releases/download/$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_$(OS_PATH)_$(ARCH_NAME).tar.gz
+	mkdir -p ../temp && curl -O -L --output-dir ../temp https://github.com/x-motemen/gobump/releases/download/$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_$(OS_PATH)_$(ARCH_NAME).$(ARCHIVE_EXT)
 
 .PHONY: extract/gobump
 extract/gobump:
-	tar -xzvf ../temp/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_$(OS_PATH)_$(ARCH_NAME).tar.gz -C ../temp
+	tar -xzvf ../temp/gobump_$(shell go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)_$(OS_PATH)_$(ARCH_NAME).$(ARCHIVE_EXT) -C ../temp
 
 .PHONY: copy/gobump
 copy/gobump:
