@@ -6,7 +6,7 @@ PROJECT_ROOT = $(PWD)
 PLATFORM ?= $(shell uname -s)
 ARCH ?= $(shell uname -m)
 
-# Define file in archive and binary name based on platform and architecture
+# For macOS
 ifeq ($(PLATFORM),Darwin)
     FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_mac_$(ARCH)_archive
     BIN_NAME = mac_$(ARCH)_command
@@ -14,6 +14,7 @@ ifeq ($(PLATFORM),Darwin)
     DOWNLOAD_AND_UNPACK = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin $(FILE_IN_ARCHIVE)
 endif
 
+# For Linux
 ifeq ($(PLATFORM),Linux)
     FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_linux_$(ARCH)_archive
     BIN_NAME = linux_$(ARCH)_command
@@ -21,7 +22,8 @@ ifeq ($(PLATFORM),Linux)
     DOWNLOAD_AND_UNPACK = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin $(FILE_IN_ARCHIVE)
 endif
 
-ifeq ($(PLATFORM),Windows)
+# For Windows (Cygwin, Git Bash, MinGW, etc.)
+ifneq (,$(or $(findstring CYGWIN,$(PLATFORM)), $(findstring MINGW,$(PLATFORM)), $(findstring MSYS,$(PLATFORM))))
     FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_windows_$(ARCH)_archive.ext
     BIN_NAME = windows_$(ARCH)_command.exe
     ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-windows-$(ARCH).zip

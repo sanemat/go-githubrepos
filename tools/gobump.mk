@@ -6,32 +6,36 @@ PROJECT_ROOT = $(PWD)
 PLATFORM ?= $(shell uname -s)
 ARCH ?= $(shell uname -m)
 
-# Define file in archive and binary name based on platform and architecture
+# For macOS
 ifeq ($(PLATFORM),Darwin)
-    FILE_IN_ARCHIVE = path_in_mac_$(ARCH)_archive
+    FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_mac_$(ARCH)_archive
     BIN_NAME = mac_$(ARCH)_command
     ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-macOS-$(ARCH).tar.gz
-    ARCHIVE_CMD = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin/ $(FILE_IN_ARCHIVE)
+    DOWNLOAD_AND_UNPACK = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin $(FILE_IN_ARCHIVE)
 endif
+
+# For Linux
 ifeq ($(PLATFORM),Linux)
-    FILE_IN_ARCHIVE = path_in_linux_$(ARCH)_archive
+    FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_linux_$(ARCH)_archive
     BIN_NAME = linux_$(ARCH)_command
     ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-linux-$(ARCH).tar.gz
-    ARCHIVE_CMD = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin/ $(FILE_IN_ARCHIVE)
+    DOWNLOAD_AND_UNPACK = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin $(FILE_IN_ARCHIVE)
 endif
-ifeq ($(PLATFORM),Windows)
-    FILE_IN_ARCHIVE = path_in_windows_$(ARCH)_archive.ext
+
+# For Windows (Cygwin, Git Bash, MinGW, etc.)
+ifneq (,$(or $(findstring CYGWIN,$(PLATFORM)), $(findstring MINGW,$(PLATFORM)), $(findstring MSYS,$(PLATFORM))))
+    FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_windows_$(ARCH)_archive.ext
     BIN_NAME = windows_$(ARCH)_command.exe
     ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-windows-$(ARCH).zip
-    ZIP_NAME = tool_$(TOOL_VERSION)_$(ARCH)_$(shell date +%s).zip
-    ARCHIVE_CMD = curl -L -o $(ZIP_NAME) $(ARCHIVE_NAME) && unzip $(ZIP_NAME) -d $(PROJECT_ROOT)/bin/ $(FILE_IN_ARCHIVE)
+    TEMP_ARCHIVE_FILE = %RANDOM%_$(shell date +%s%N).zip
+    DOWNLOAD_AND_UNPACK = curl -L -o $(TEMP_ARCHIVE_FILE) $(ARCHIVE_NAME) && unzip $(TEMP_ARCHIVE_FILE) $(FILE_IN_ARCHIVE) -d $(PROJECT_ROOT)/bin && rm $(TEMP_ARCHIVE_FILE)
 endif
 
 install:
-	@if [ -z "$(ARCH)" ] || [ -z "$(ARCHIVE_CMD)" ]; then \
+	@if [ -z "$(ARCH)" ] || [ -z "$(DOWNLOAD_AND_UNPACK)" ]; then \
 		go install example.com@$(TOOL_VERSION); \
 	else \
 		mkdir -p $(PROJECT_ROOT)/bin; \
-		$(ARCHIVE_CMD); \
+		$(DOWNLOAD_AND_UNPACK); \
 		mv $(PROJECT_ROOT)/bin/$(FILE_IN_ARCHIVE) $(PROJECT_ROOT)/bin/$(BIN_NAME); \
 	fi
