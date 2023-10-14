@@ -1,41 +1,49 @@
 TOOL_VERSION = 1.0.0
 BASE_URL = https://example.com/tool
 PROJECT_ROOT = $(PWD)
+MAKEFILE_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 # Detect platform and architecture.
 PLATFORM ?= $(shell uname -s)
 ARCH ?= $(shell uname -m)
 
-# For macOS
+# Platform-specific settings.
 ifeq ($(PLATFORM),Darwin)
-    FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_mac_$(ARCH)_archive
-    BIN_NAME = mac_$(ARCH)_command
-    ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-macOS-$(ARCH).tar.gz
-    DOWNLOAD_AND_UNPACK = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin $(FILE_IN_ARCHIVE)
+	EXTRACT_DIR = $(MAKEFILE_DIR)/$(shell mktemp --dry-run XXXXXX)
+	TEMP_ARCHIVE_FILE = $(MAKEFILE_DIR)/$(shell mktemp --dry-run XXXXXX.tar.gz)
+	UNPACK_CMD = tar -xzvf $(TEMP_ARCHIVE_FILE) -C $(EXTRACT_DIR)
+	FILE_IN_ARCHIVE = path_for_mac_in_the_archive
+	BIN_NAME = desired_tool_name_for_mac
+else ifeq ($(PLATFORM),Linux)
+	EXTRACT_DIR = $(MAKEFILE_DIR)/$(shell mktemp --dry-run XXXXXX)
+	TEMP_ARCHIVE_FILE = $(MAKEFILE_DIR)/$(shell mktemp --dry-run XXXXXX.tar.gz)
+	UNPACK_CMD = tar -xzvf $(TEMP_ARCHIVE_FILE) -C $(EXTRACT_DIR)
+	FILE_IN_ARCHIVE = path_for_linux_in_the_archive
+	BIN_NAME = desired_tool_name_for_linux
+else ifneq (,$(or $(findstring CYGWIN,$(PLATFORM)), $(findstring MINGW,$(PLATFORM)), $(findstring MSYS,$(PLATFORM))))
+	EXTRACT_DIR = $(MAKEFILE_DIR)/%RANDOM%_$(shell date +%s%N)
+	TEMP_ARCHIVE_FILE = $(MAKEFILE_DIR)/%RANDOM%_$(shell date +%s%N).zip
+	UNPACK_CMD = unzip $(TEMP_ARCHIVE_FILE) -d $(EXTRACT_DIR)
+	FILE_IN_ARCHIVE = path_for_windows_in_the_archive
+	BIN_NAME = desired_tool_name_for_windows
 endif
 
-# For Linux
-ifeq ($(PLATFORM),Linux)
-    FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_linux_$(ARCH)_archive
-    BIN_NAME = linux_$(ARCH)_command
-    ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-linux-$(ARCH).tar.gz
-    DOWNLOAD_AND_UNPACK = curl -L $(ARCHIVE_NAME) | tar xzf - -C $(PROJECT_ROOT)/bin $(FILE_IN_ARCHIVE)
-endif
-
-# For Windows (Cygwin, Git Bash, MinGW, etc.)
-ifneq (,$(or $(findstring CYGWIN,$(PLATFORM)), $(findstring MINGW,$(PLATFORM)), $(findstring MSYS,$(PLATFORM))))
-    FILE_IN_ARCHIVE = nested_dir/another_dir/path_in_windows_$(ARCH)_archive.ext
-    BIN_NAME = windows_$(ARCH)_command.exe
-    ARCHIVE_NAME = $(BASE_URL)-$(TOOL_VERSION)-windows-$(ARCH).zip
-    TEMP_ARCHIVE_FILE = %RANDOM%_$(shell date +%s%N).zip
-    DOWNLOAD_AND_UNPACK = curl -L -o $(TEMP_ARCHIVE_FILE) $(ARCHIVE_NAME) && unzip $(TEMP_ARCHIVE_FILE) $(FILE_IN_ARCHIVE) -d $(PROJECT_ROOT)/bin && rm $(TEMP_ARCHIVE_FILE)
-endif
+# Set download command.
+DOWNLOAD_CMD = curl -L -o $(TEMP_ARCHIVE_FILE) $(BASE_URL)/$(PLATFORM)/$(ARCH)/v$(TOOL_VERSION)
 
 install:
-	@if [ -z "$(ARCH)" ] || [ -z "$(DOWNLOAD_AND_UNPACK)" ]; then \
+	@if [ -z "$(PLATFORM)" ] || [ -z "$(ARCH)" ]; then \
+		echo "Missing PLATFORM or ARCH, defaulting to 'go install'."; \
 		go install example.com@$(TOOL_VERSION); \
-	else \
+		exit 0; \
+	fi; \
+	if $(DOWNLOAD_CMD); then \
+		$(UNPACK_CMD); \
 		mkdir -p $(PROJECT_ROOT)/bin; \
-		$(DOWNLOAD_AND_UNPACK); \
-		mv $(PROJECT_ROOT)/bin/$(FILE_IN_ARCHIVE) $(PROJECT_ROOT)/bin/$(BIN_NAME); \
+		mv $(EXTRACT_DIR)/$(FILE_IN_ARCHIVE) $(PROJECT_ROOT)/bin/$(BIN_NAME); \
+		rm -rf $(EXTRACT_DIR); \
+		rm -f $(TEMP_ARCHIVE_FILE); \
+	else \
+		echo "Failed to download. Falling back to 'go install'."; \
+		go install example.com@$(TOOL_VERSION); \
 	fi
