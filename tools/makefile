@@ -1,16 +1,8 @@
-OS_NAME := $(shell uname -s | tr A-Z a-z)
-ARCH_NAME := amd64
-ifeq ($(OS_NAME), linux)
-	OS_PATH := linux
-else ifeq ($(OS_NAME), darwin)
-	OS_PATH := darwin
+UNAME_S := $(shell uname -s)
+ifeq ($(OS),Windows_NT)
+    EXTENSION=.exe
 else
-	OS_PATH := windows
-endif
-ifeq ($(OS_NAME), linux)
-	ARCHIVE_EXT := tar.gz
-else
-	ARCHIVE_EXT := zip
+    EXTENSION=
 endif
 
 .PHONY: download/gobump
