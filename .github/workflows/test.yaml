@@ -25,8 +25,6 @@ jobs:
         shell: bash
       - name: checkout
         uses: actions/checkout@v4
-      - name: os
-        run: make --directory=tools echo/os-name
       - name: deps
         run: make install-tools
       - name: test

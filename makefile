@@ -1,4 +1,9 @@
-VERSION = $(shell ./bin/gobump show -r)
+ifeq ($(OS),Windows_NT)
+    EXTENSION=.exe
+else
+    EXTENSION=
+endif
+VERSION = $(shell ./bin/gobump$(EXTENSION) show -r)
 CURRENT_REVISION = $(shell git rev-parse --short HEAD)
 BUILD_LDFLAGS = "-s -w -X github.com/sanemat/go-githubrepos.revision=$(CURRENT_REVISION)"
 u := $(if $(update),-u)
