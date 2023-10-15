@@ -2,6 +2,7 @@ MAKEFILE_DIR := $(dir $(lastword $(MAKEFILE_LIST))) # include trailing slash
 TOOL_VERSION := $(shell cd $(MAKEFILE_DIR) && go list -m -f '{{ .Version }}' github.com/x-motemen/gobump)
 BASE_URL := https://github.com/x-motemen/gobump/releases/download
 PROJECT_ROOT := $(PWD)
+GO_INSTALL_URL := github.com/x-motemen/gobump/cmd/gobump@$(TOOL_VERSION)
 
 # Detect platform and architecture.
 PLATFORM ?= $(shell uname -s)
@@ -48,7 +49,7 @@ DOWNLOAD_CMD := curl -L -o $(TEMP_ARCHIVE_FILE) $(BASE_URL)/$(TARGET_PATH)
 install:
 	@if [ -z "$(PLATFORM)" ] || [ -z "$(ARCH)" ] || [ -z "$(ARCHPATH)" ]; then \
 		echo "Missing PLATFORM or ARCH, defaulting to 'go install'."; \
-		go install github.com/x-motemen/gobump/cmd/gobump@$(TOOL_VERSION); \
+		go install $(GO_INSTALL_URL); \
 		exit 0; \
 	fi; \
 	if $(DOWNLOAD_CMD); then \
@@ -60,5 +61,5 @@ install:
 		rm -f $(TEMP_ARCHIVE_FILE); \
 	else \
 		echo "Failed to download. Falling back to 'go install'."; \
-		go install github.com/x-motemen/gobump/cmd/gobump@$(TOOL_VERSION); \
+		go install $(GO_INSTALL_URL); \
 	fi
